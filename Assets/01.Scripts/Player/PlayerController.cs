@@ -7,11 +7,14 @@ using UnityEngine.InputSystem;
 public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
-    public float moveSpeed;
+    public float walkSpeed;
     public float runSpeed;
     private Vector2 curMovementInput;
     public float jumpPower;
     public LayerMask groundLayerMask;
+    public float runStamina;
+    private bool isRun = false;
+
 
     [Header("Look")]
     public Transform playerLook;
@@ -23,7 +26,8 @@ public class PlayerController : MonoBehaviour
     public float minLookAngleY;
 
 
-    Rigidbody rigid;
+    private Rigidbody rigid;
+    private Coroutine runStaminaCoroutine;
 
     private void Awake()
     {
@@ -36,7 +40,14 @@ public class PlayerController : MonoBehaviour
     }
     private void FixedUpdate()
     {
-        Move();
+        if (isRun && CharacterManager.Instance.Player.playerCondition.curStamina > 0)
+        {
+            Move(runSpeed);
+        }
+        else
+        {
+            Move(walkSpeed);
+        }
     }
 
     private void LateUpdate()
@@ -44,10 +55,10 @@ public class PlayerController : MonoBehaviour
         Look();
     }
 
-    private void Move()
+    private void Move(float speed)
     {
         Vector3 dir = transform.forward * curMovementInput.y + transform.right * curMovementInput.x;
-        dir *= moveSpeed;
+        dir *= speed;
 
         dir.y = rigid.velocity.y;
 
@@ -62,11 +73,6 @@ public class PlayerController : MonoBehaviour
         curLookUp = Mathf.Clamp(curLookUp, minLookAngleY, maxLookAngleY);
 
         playerLook.localRotation = Quaternion.Euler(-curLookUp, curLookRight, 0);
-    }
-
-    private void Jump()
-    {
-
     }
 
     public void OnMove(InputAction.CallbackContext context)
@@ -95,6 +101,46 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnRun(InputAction.CallbackContext context)
+    {
+        if (CharacterManager.Instance.Player.playerCondition.curStamina <= 0) return;
+      
+        if (context.phase == InputActionPhase.Performed)
+        {
+            isRun = true;
+            
+            runStaminaCoroutine = StartCoroutine(UseRuningStamina());
+        }
+        else if(context.phase == InputActionPhase.Canceled)
+        {
+            isRun = false;
+            if (runStaminaCoroutine != null)
+            {
+                StopCoroutine(runStaminaCoroutine);
+            }
+            
+                
+        }
+    }
+
+    private IEnumerator UseRuningStamina()
+    {
+        while(isRun)
+        {
+            if (!CharacterManager.Instance.Player.playerCondition.UseStamina(runStamina * Time.deltaTime))
+            {
+                //사용 가능 스태미나 없을시 종료
+                if (!CharacterManager.Instance.Player.playerCondition.UseStamina(runStamina))
+                {
+                    Debug.Log("스테미나없다");
+                    isRun = false;
+                    yield break;                    
+                }
+            }          
+                yield return null;
+        }
+    }
+
     private bool IsGrounded()
     {
 
@@ -113,4 +159,6 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
+
+
 }
