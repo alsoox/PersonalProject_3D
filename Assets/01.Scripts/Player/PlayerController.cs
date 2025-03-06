@@ -118,8 +118,6 @@ public class PlayerController : MonoBehaviour
             {
                 StopCoroutine(runStaminaCoroutine);
             }
-            
-                
         }
     }
 
@@ -159,6 +157,4 @@ public class PlayerController : MonoBehaviour
 
         return false;
     }
-
-
 }
