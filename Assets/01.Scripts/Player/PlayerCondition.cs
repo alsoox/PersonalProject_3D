@@ -5,17 +5,19 @@ using UnityEngine;
 public class PlayerCondition : MonoBehaviour
 {
     [Header("PlayerCondition")]
-    [HideInInspector]public float curHealth;
+    public float curHealth;
     public float maxHealth;
     public float maxStamina;
     public float passiveStamina;
     [HideInInspector] public float curStamina;
+    public float reserveApple;
 
     // Start is called before the first frame update
     void Start()
     {
         curHealth = maxHealth;
         curStamina = maxStamina;
+        reserveApple = 0f;
     }
 
     // Update is called once per frame
@@ -41,4 +43,18 @@ public class PlayerCondition : MonoBehaviour
         curStamina += passiveStamina * Time.deltaTime;        
     }
  
+    public void AddApple(int amount)
+    {
+        reserveApple += amount;
+    }
+
+    public void AddHealth(float value)
+    {
+       curHealth = Mathf.Clamp(curHealth += value, 0, maxHealth);
+    }
+
+    public void AddStamina(float value)
+    {
+        curStamina = Mathf.Clamp(curStamina += value, 0, maxHealth);
+    }
 }

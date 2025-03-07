@@ -13,4 +13,15 @@ public class ItemObject : MonoBehaviour
 
         return str;
     }
+
+    public void OnInteract()
+    {
+        //땅에 떨어진(Etable) Type 은 소지할수 없음
+        if (itemData.itemType != ItemType.Etable)
+        {
+            CharacterManager.Instance.Player.itemData = itemData;
+            CharacterManager.Instance.Player.addItem?.Invoke();
+            Destroy(gameObject);
+        }
+    }
 }

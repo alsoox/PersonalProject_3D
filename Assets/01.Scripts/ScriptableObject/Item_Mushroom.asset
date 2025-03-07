@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adae255aebb17142be50b662bdb8873, type: 3}
   m_Name: Item_Mushroom
   m_EditorClassIdentifier: 
-  itemName: "\uB3C5\uBC84\uC12F"
-  description: "\uBA39\uC73C\uBA74 \uCCB4\uB825\uC744 \uAC10\uC18C \uC2DC\uD0B5\uB2C8\uB2E4."
+  itemName: "(\uB545\uC5D0 \uB538\uC5B4\uC9C4) \uB3C5\uBC84\uC12F"
+  description: "\uBA39\uC73C\uBA74 \uCCB4\uB825\uC744 20 \uAC10\uC18C \uC2DC\uD0B5\uB2C8\uB2E4."
   itemType: 1
   canStack: 0
   maxStacking: 0

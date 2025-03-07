@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,7 +16,6 @@ public class PlayerController : MonoBehaviour
     public float runStamina;
     private bool isRun = false;
 
-
     [Header("Look")]
     public Transform playerLook;
     private float curLookUp;
@@ -24,10 +24,11 @@ public class PlayerController : MonoBehaviour
     public float mouseSensitivity;
     public float maxLookAngleY;
     public float minLookAngleY;
-
+    private bool canLook;
 
     private Rigidbody rigid;
     private Coroutine runStaminaCoroutine;
+    public UIInventory inventory;
 
     private void Awake()
     {
@@ -36,6 +37,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        canLook = true;
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
@@ -52,7 +54,10 @@ public class PlayerController : MonoBehaviour
 
     private void LateUpdate()
     {
-        Look();
+        if (canLook)
+        {
+            Look();
+        }
     }
 
     private void Move(float speed)
@@ -121,6 +126,15 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started)
+        {
+            inventory.ShowInventory();
+            ToggleCursor();
+        }
+    }
+
     private IEnumerator UseRuningStamina()
     {
         while(isRun)
@@ -130,7 +144,6 @@ public class PlayerController : MonoBehaviour
                 //사용 가능 스태미나 없을시 종료
                 if (!CharacterManager.Instance.Player.playerCondition.UseStamina(runStamina))
                 {
-                    Debug.Log("스테미나없다");
                     isRun = false;
                     yield break;                    
                 }
@@ -141,7 +154,6 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
-
         Ray[] rays = new Ray[4]
         {
             new Ray(transform.position + (transform.forward * 0.3f) + (transform.up * 0.01f),Vector3.down),
@@ -154,7 +166,13 @@ public class PlayerController : MonoBehaviour
         {
             if (Physics.Raycast(rays[i], 0.1f, groundLayerMask)) return true;            
         }
-
         return false;
+    }
+
+    private void ToggleCursor()
+    {
+        bool toggle = Cursor.lockState == CursorLockMode.Locked;
+        Cursor.lockState = toggle ? CursorLockMode.None : CursorLockMode.Locked;
+        canLook = !toggle;
     }
 }

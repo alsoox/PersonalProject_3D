@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adae255aebb17142be50b662bdb8873, type: 3}
   m_Name: Item_Soda
   m_EditorClassIdentifier: 
-  itemName: "\uD0C4\uC0B0\uC74C\uB8CC"
+  itemName: "(\uC0AC\uC6A9\uAC00\uB2A5\uD55C) \uD0C4\uC0B0\uC74C\uB8CC"
   description: "\uC2A4\uD14C\uBBF8\uB098\uB97C \uB300\uD3ED \uC99D\uAC00 \uC2DC\uCF1C\uC90D\uB2C8\uB2E4."
   itemType: 0
+  icon: {fileID: 21300000, guid: eab60ac98235aa440b5de064ebcdf5b3, type: 3}
   canStack: 1
   maxStacking: 5
   value: 30

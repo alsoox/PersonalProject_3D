@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Interaction : MonoBehaviour
 {
@@ -11,7 +12,7 @@ public class Interaction : MonoBehaviour
     public LayerMask interatLayer;
     Camera _camera;
 
-    private GameObject curIteractGameObject;
+    public GameObject curIteractGameObject;
     private ItemObject curItemObject;
     public TextMeshProUGUI promtText;
 
@@ -47,4 +48,13 @@ public class Interaction : MonoBehaviour
         promtText.gameObject.SetActive(true);
         promtText.text = curItemObject.GetInteractPrompt();
     }
+
+    public void OnIterack(InputAction.CallbackContext context)
+    {
+        if (context.phase == InputActionPhase.Started && curIteractGameObject != null)
+        {
+            curItemObject.OnInteract();        
+        }
+    }
+
 }

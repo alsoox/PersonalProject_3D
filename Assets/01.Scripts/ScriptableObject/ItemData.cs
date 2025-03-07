@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public enum ItemType
 {
@@ -14,6 +15,7 @@ public enum ConditionType
 {
     Health,
     Stamina,
+    Apple
 }
 
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
@@ -23,6 +25,7 @@ public class ItemData : ScriptableObject
     public string itemName;
     public string description;
     public ItemType itemType;
+    public Sprite icon;
 
     [Header("Stacking")]
     public bool canStack;

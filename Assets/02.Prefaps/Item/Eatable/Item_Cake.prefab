@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3204697837200349394}
   - component: {fileID: 1966972606054069587}
-  - component: {fileID: 911014929784247950}
+  - component: {fileID: 7456571198390553096}
   m_Layer: 7
   m_Name: Item_Cake
   m_TagString: Untagged
@@ -109,7 +109,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6934312051240845849}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.404, y: 1.5, z: -8}
   m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
@@ -138,7 +138,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.15, y: 0.15, z: 0.15}
   m_Center: {x: 0, y: 0.05, z: 0}
---- !u!114 &911014929784247950
+--- !u!114 &7456571198390553096
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6934312051240845849}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23adc93cced6e084ebcb3a012e06f39f, type: 3}
+  m_Script: {fileID: 11500000, guid: 6722d8c20ac443547aa8f4d2070be6bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemData: {fileID: 11400000, guid: 6faaef4cce452744d88ce0e254a95703, type: 2}
+  itemData: {fileID: 0}

@@ -24,6 +24,8 @@ public class UIAllCondition : MonoBehaviour
         if (playerCondition == null) return;
 
         health.curValue = playerCondition.curHealth;
-        stamina.curValue = playerCondition.curStamina;    
+        stamina.curValue = playerCondition.curStamina;
+        health.maxValue = playerCondition.maxHealth;
+        stamina.maxValue = playerCondition.maxStamina;
     }
 }
