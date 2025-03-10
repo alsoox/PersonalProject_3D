@@ -1,7 +1,7 @@
  Unity 3D 입문 개인 프로젝트  
  스파르타코딩클럽에서 주어진 필수 및 도전 기능 진행
  ## 게임 시연 영상 링크  
- [![Video Label](http://img.youtube.com/vi/59USvjy2toI/0.jpg)](https://youtu.be/jJMGpqUMNqk)
+ [![Video Label](http://img.youtube.com/vi/jJMGpqUMNqk/0.jpg)](https://youtu.be/jJMGpqUMNqk)
  
  ## 🔨필수 기능 구현 
  ### 1. 기본 이동 및 점프
