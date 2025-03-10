@@ -3,6 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+public enum SkillType
+{
+    Dash,
+    DoubleJump
+}
+
 public class EquipSkill : MonoBehaviour
 {
     [Header("Dash")]
@@ -10,6 +16,7 @@ public class EquipSkill : MonoBehaviour
     public float dashDuration;
     public float dashCoolTime;
     private Coroutine dashCorutine;
+    public float lastDashTime = -Mathf.Infinity; // 처음에는 스킬 쓸 수 있도록 무한대 설정
 
     [Header("DoubleJump")]
     public bool isDoubleJump = false;
@@ -33,10 +40,15 @@ public class EquipSkill : MonoBehaviour
 
         if (context.phase == InputActionPhase.Started)
         {
-            Debug.Log("대쉬했다");
-            if (dashCorutine != null) StopCoroutine(dashCorutine);
+            if (Time.time < lastDashTime + dashCoolTime)
+            {
+                return;
+            }
 
+
+            if (dashCorutine != null) StopCoroutine(dashCorutine);
             dashCorutine = StartCoroutine(Dash());
+            lastDashTime = Time.time;
         }
     }
 
