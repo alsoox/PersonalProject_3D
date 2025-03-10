@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
 {
     [Header("Movement")]
     public float walkSpeed;
-    public float runSpeed;
+    public float addSpeed;
     private Vector2 curMovementInput;
     public float jumpPower;
     public LayerMask groundLayerMask;
@@ -44,14 +44,13 @@ public class PlayerController : MonoBehaviour
     {
         if (isRun && CharacterManager.Instance.Player.playerCondition.curStamina > 0)
         {
-            Move(runSpeed);
+            Move(walkSpeed + addSpeed);
         }
         else
         {
             Move(walkSpeed);
         }
     }
-
     private void LateUpdate()
     {
         if (canLook)
@@ -101,10 +100,24 @@ public class PlayerController : MonoBehaviour
     {
         if (context.phase == InputActionPhase.Started && IsGrounded())
         {
-            Debug.Log("Jump");
-            rigid.AddForce(Vector3.up * jumpPower, ForceMode.Impulse);
+            Jump(jumpPower);
+            CharacterManager.Instance.Player.skill.isDoubleJump = false;
         }
+
+        if (context.phase == InputActionPhase.Started && CharacterManager.Instance.Player.skill.HasDoubleJump()
+            && !CharacterManager.Instance.Player.skill.isDoubleJump && !IsGrounded())
+        {
+            Jump(jumpPower);
+            CharacterManager.Instance.Player.skill.isDoubleJump = true;
+        }
+
     }
+
+    public void Jump(float _jumppower)
+    {
+        rigid.AddForce(Vector3.up * _jumppower, ForceMode.Impulse);
+    }
+        
 
     public void OnRun(InputAction.CallbackContext context)
     {
@@ -164,7 +177,7 @@ public class PlayerController : MonoBehaviour
 
         for (int i = 0; i < rays.Length; i++)
         {
-            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask)) return true;            
+            if (Physics.Raycast(rays[i], 0.1f, groundLayerMask)) return true;          
         }
         return false;
     }

@@ -13,11 +13,13 @@ MonoBehaviour:
   m_Name: Item_Sword
   m_EditorClassIdentifier: 
   itemName: "\uAC80"
-  description: "\uC7A5\uCC29 \uC2DC \uC804\uCCB4\uC2A4\uD0DC\uBBF8\uB098 \uC99D\uAC00\uC2DC\uCF1C
-    \uC90D\uB2C8\uB2E4"
+  description: "\uC7A5\uCC29 \uC2DC \uB370\uC26C\uC2A4\uD0AC \uC0AC\uC6A9\uAC00\uB2A5
+    (Q)"
   itemType: 2
   icon: {fileID: 21300000, guid: a7f1d2b3ce2fa2f42a18a778ecbd95a5, type: 3}
   canStack: 0
   maxStacking: 0
-  value: 50
-  type: 1
+  value: 0
+  type: 0
+  equipPrefap: {fileID: 992637739524519790, guid: 0da769002dabbba4ca3dfa36c372ee15, type: 3}
+  equipType: 1

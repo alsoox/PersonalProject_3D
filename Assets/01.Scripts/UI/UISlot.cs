@@ -83,24 +83,24 @@ public class UISlot : MonoBehaviour
 
         if(isEquip)
         {
-            if (itemData.type == ConditionType.Health)
+            if (itemData.equipType == EquipType.Shield)
             {
-                CharacterManager.Instance.Player.playerCondition.maxHealth += itemData.value;
+                CharacterManager.Instance.Player.equip.Equip(itemData);
             }
-            else if(itemData.type == ConditionType.Stamina)
+            else if(itemData.equipType == EquipType.Sword)
             {
-                CharacterManager.Instance.Player.playerCondition.maxStamina += itemData.value;
+                CharacterManager.Instance.Player.equip.Equip(itemData);
             }
         }
         else
         {
-            if (itemData.type == ConditionType.Health)
+            if (itemData.equipType == EquipType.Shield)
             {
-                CharacterManager.Instance.Player.playerCondition.maxHealth -= itemData.value;
+                CharacterManager.Instance.Player.equip.UnEquip(itemData);
             }
-            else if (itemData.type == ConditionType.Stamina)
+            else if (itemData.equipType == EquipType.Sword)
             {
-                CharacterManager.Instance.Player.playerCondition.maxStamina -= itemData.value;
+                CharacterManager.Instance.Player.equip.UnEquip(itemData);
             }
 
         }

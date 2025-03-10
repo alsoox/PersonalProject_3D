@@ -10,6 +10,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 
 public class UIInventory : MonoBehaviour
 {
+    [Header("ItemSlot")]
     private List<ItemData> inventory = new List<ItemData>();
     private List<UISlot> slots;
 
@@ -17,6 +18,8 @@ public class UIInventory : MonoBehaviour
     public TextMeshProUGUI itemDiscription;
     public Button useButton;
     public UISlot selcetSlot;
+    [Header("Apple")]
+    public TextMeshProUGUI appleText;
 
     // Start is called before the first frame update
     void Start()
@@ -39,6 +42,7 @@ public class UIInventory : MonoBehaviour
         {
             gameObject.SetActive(true);
         }
+        UpdateUI();
     }
 
     private void AddItem()
@@ -73,6 +77,8 @@ public class UIInventory : MonoBehaviour
                 slots[i].Clear();
             }
         }
+
+        appleText.text = CharacterManager.Instance.Player.playerCondition.reserveApple.ToString();
     }
 
     private UISlot GetItemSlot(ItemData data)

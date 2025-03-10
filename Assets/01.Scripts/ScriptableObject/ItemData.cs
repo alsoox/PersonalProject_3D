@@ -18,6 +18,12 @@ public enum ConditionType
     Apple
 }
 
+public enum EquipType
+{
+    Shield,
+    Sword
+}
+
 [CreateAssetMenu(fileName = "Item", menuName = "New Item")]
 public class ItemData : ScriptableObject
 {
@@ -34,4 +40,8 @@ public class ItemData : ScriptableObject
     [Header("ConditionUpValue")]
     public float value;
     public ConditionType type;
+
+    [Header("EquipPrefap")]
+    public GameObject equipPrefap;
+    public EquipType equipType;
 }

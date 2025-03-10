@@ -15,7 +15,10 @@ MonoBehaviour:
   itemName: "(\uB545\uC5D0 \uB538\uC5B4\uC9C4) \uC0AC\uACFC"
   description: "\uD68D\uB4DD\uC6A9 \uC544\uC774\uD15C \uC785\uB2C8\uB2E4."
   itemType: 1
+  icon: {fileID: 21300000, guid: 90a7b587e18272841b3133504d5bea1c, type: 3}
   canStack: 0
   maxStacking: 0
   value: 1
   type: 2
+  equipPrefap: {fileID: 0}
+  equipType: 0
