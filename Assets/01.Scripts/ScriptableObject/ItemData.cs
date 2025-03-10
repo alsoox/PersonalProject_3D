@@ -1,14 +1,13 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public enum ItemType
 {
-    Consumable,
-    Etable,
-    Equipable
+    Consumable,//소비용아이템
+    Etable,//섭취용아이템
+    Equipable//장착용아이템
 }
 
 public enum ConditionType

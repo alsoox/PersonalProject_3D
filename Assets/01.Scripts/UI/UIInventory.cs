@@ -2,11 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
-using static UnityEditor.Progress;
-using static UnityEngine.EventSystems.EventTrigger;
+
 
 public class UIInventory : MonoBehaviour
 {
@@ -26,14 +24,15 @@ public class UIInventory : MonoBehaviour
     {
         CharacterManager.Instance.Player.playerController.inventory = this;
         CharacterManager.Instance.Player.addItem += AddItem;
+        //초기 UI Slot 가져오기
         slots = GetComponentsInChildren<UISlot>().ToList();
-
         useButton.onClick.AddListener(OnClickUseButton);
         gameObject.SetActive(false);
     }
 
     public void ShowInventory()
     {
+        //인벤토리 Hierarchy 활성화 여부에 따라 진행
         if (gameObject.activeInHierarchy)
         {
             gameObject.SetActive(false);
@@ -49,6 +48,8 @@ public class UIInventory : MonoBehaviour
     {
         ItemData item = CharacterManager.Instance.Player.itemData;
 
+        //Player - Interaction 된 아이템 정보 확인 후 Slot에 등록
+        //인벤토리에 아이템 있으면 ++ 없으면 신규아이템 등록
         if (inventory.Contains(item))
         {            
             UISlot slot = GetItemSlot(item);
@@ -66,6 +67,7 @@ public class UIInventory : MonoBehaviour
 
     public void UpdateUI()
     {
+        //UI 최신화 시켜주기
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].itemData != null)
@@ -83,6 +85,7 @@ public class UIInventory : MonoBehaviour
 
     private UISlot GetItemSlot(ItemData data)
     {
+        //활성화 된 아이템 슬롯 가져오기
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].itemData == data && slots[i].type == data.itemType)
@@ -95,6 +98,7 @@ public class UIInventory : MonoBehaviour
 
     private UISlot GetEmptySlot(ItemType itemType)
     {
+        //비활성화 된 아이템 슬롯 가져오기 / 아이템 타입별로 슬롯이 다르기에 타입 확인
         for (int i = 0; i < slots.Count; i++)
         {
             if (slots[i].itemData == null && slots[i].type == itemType)

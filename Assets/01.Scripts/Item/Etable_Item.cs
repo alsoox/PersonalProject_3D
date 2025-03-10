@@ -1,13 +1,14 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Etable_Item : ItemObject
 {
     public LayerMask targetLayer;
 
+
     private void OnTriggerEnter(Collider other)
     {
+        //섭취용 아이템 Player 충돌 검사 후 체력 회복 및 코인 수 증가
         if (((1<< other.gameObject.layer) & targetLayer) != 0 )
         {
             switch(itemData.type)

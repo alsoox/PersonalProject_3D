@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class UIAllCondition : MonoBehaviour
@@ -22,7 +21,7 @@ public class UIAllCondition : MonoBehaviour
     void Update()
     {
         if (playerCondition == null) return;
-
+        //플레이어 Condition 확인 후 UI업데이트
         health.curValue = playerCondition.curHealth;
         stamina.curValue = playerCondition.curStamina;
         health.maxValue = playerCondition.maxHealth;

@@ -1,6 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -25,6 +23,7 @@ public class UISlot : MonoBehaviour
 
     private void Start()
     {
+        //인벤토리에 획득 아이템 정보 저장하므로 인벤토리 필요
         inventory = FindObjectOfType<UIInventory>();
         isEquip = false;        
     }
@@ -35,9 +34,11 @@ public class UISlot : MonoBehaviour
         switch(type)
         {
             case ItemType.Consumable: 
+                //사용 아이템 수량 확인 후 UI 표시
                 itemCurText.text = quantity.ToString();                
                 break;
             case ItemType.Equipable:
+                //착용 아이템 착용 유무에 따른 표시
                 if (isEquip)
                 {
                     itemCurText.text = "[E]";
@@ -51,7 +52,8 @@ public class UISlot : MonoBehaviour
     }
 
     public void Clear()
-    {        
+    {   
+        //아이템 슬롯 초기화
         itemData = null;
         icon.sprite = null;        
     }
@@ -63,6 +65,7 @@ public class UISlot : MonoBehaviour
     
     public void UseConsume()
     {
+        //사용 아이템 타입 여부에 따른 사용 후 플레이어 상태 변경
         if (quantity > 0)
         {
             if (itemData.type == ConditionType.Health)
@@ -81,6 +84,7 @@ public class UISlot : MonoBehaviour
     {
         isEquip = !isEquip;
 
+        //착용 아이템 타입에 따라 Equipment 아이템 데이터 전달
         if(isEquip)
         {
             if (itemData.equipType == EquipType.Shield)

@@ -1,7 +1,5 @@
 using System;
 using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -38,12 +36,14 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         canLook = true;
+        //시작 시 커서 Lock
         Cursor.lockState = CursorLockMode.Locked;
     }
     private void FixedUpdate()
     {
         if (isRun && CharacterManager.Instance.Player.playerCondition.curStamina > 0)
         {
+            //Run(스테미나 가능 시) 일 시 달리기
             Move(walkSpeed + addSpeed);
         }
         else
@@ -74,6 +74,7 @@ public class PlayerController : MonoBehaviour
         curLookUp += mouseDelta.y * mouseSensitivity;
         curLookRight += mouseDelta.x * mouseSensitivity;
 
+        //마우스 상하 각도 최대,최소치 조정
         curLookUp = Mathf.Clamp(curLookUp, minLookAngleY, maxLookAngleY);
 
         playerLook.localRotation = Quaternion.Euler(-curLookUp, curLookRight, 0);
@@ -81,6 +82,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnMove(InputAction.CallbackContext context)
     {
+        //기본 움직임 Input 받아오기
         if (context.phase == InputActionPhase.Performed)
         {
             curMovementInput = context.ReadValue<Vector2>();
@@ -93,6 +95,7 @@ public class PlayerController : MonoBehaviour
 
     public void OnLook(InputAction.CallbackContext context)
     {
+        //마우스 움직임 Input 받아오기
         mouseDelta = context.ReadValue<Vector2>();
     }
 
@@ -104,6 +107,7 @@ public class PlayerController : MonoBehaviour
             CharacterManager.Instance.Player.skill.isDoubleJump = false;
         }
 
+        //더블 점프 가능 여부 확인 후 추가 점프 진행
         if (context.phase == InputActionPhase.Started && CharacterManager.Instance.Player.skill.HasDoubleJump()
             && !CharacterManager.Instance.Player.skill.isDoubleJump && !IsGrounded())
         {
@@ -127,6 +131,7 @@ public class PlayerController : MonoBehaviour
         {
             isRun = true;
             
+            //Run 지속 시 스테미나 지속 감소
             runStaminaCoroutine = StartCoroutine(UseRuningStamina());
         }
         else if(context.phase == InputActionPhase.Canceled)
@@ -142,8 +147,9 @@ public class PlayerController : MonoBehaviour
     public void OnInventory(InputAction.CallbackContext context)
     {
         if (context.phase == InputActionPhase.Started)
-        {
+        {           
             inventory.ShowInventory();
+            //인벤토리 열람 및 닫힘 시 커서 Lock 설정
             ToggleCursor();
         }
     }
@@ -167,6 +173,7 @@ public class PlayerController : MonoBehaviour
 
     private bool IsGrounded()
     {
+        //플레이어 기준 Ray 충돌 체크로 바닥 및 Plane 확인
         Ray[] rays = new Ray[4]
         {
             new Ray(transform.position + (transform.forward * 0.3f) + (transform.up * 0.01f),Vector3.down),

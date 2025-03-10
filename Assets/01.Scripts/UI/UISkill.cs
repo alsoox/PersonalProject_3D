@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -21,6 +20,7 @@ public class UISkill : MonoBehaviour
 
     public void DashCoolDown()
     {
+        //대쉬 스킬 쿨타임 정보 확인 후 UI 적용
         float percnetage = (Time.time - equipSkill.lastDashTime) / equipSkill.dashCoolTime;
         dashCoolImage.fillAmount = percnetage;
     }

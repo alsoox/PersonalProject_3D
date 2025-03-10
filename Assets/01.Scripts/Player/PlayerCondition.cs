@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerCondition : MonoBehaviour
@@ -39,6 +38,7 @@ public class PlayerCondition : MonoBehaviour
 
     private void PassiveStamina()
     {
+        //스테미나 소모 시 기본 스태미나 증가
         if (curStamina >= maxHealth) return;
         curStamina += passiveStamina * Time.deltaTime;        
     }
