@@ -11,7 +11,7 @@
    + 점프 (Space)
    + 인벤토리 (Tab)
    + 아이템획득 (E)
-   + 기본 대쉬 (Shift)
+   + 기본 대쉬 (Shift) - 스테미나사용
    + 스킬 대쉬 (Q)
 
 ![image](https://github.com/user-attachments/assets/8b0c4961-197c-45d6-aae8-8c65a3297bd7)
