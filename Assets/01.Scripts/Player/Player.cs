@@ -1,14 +1,24 @@
+using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    PlayerController playerController;
+    public PlayerController playerController;
+    public PlayerCondition playerCondition;
+    public Equipment equip;
+    public EquipSkill skill;
+
+    public ItemData itemData;
+    public Action addItem;
 
     void Awake()
     {
         CharacterManager.Instance.Player = this;
         playerController = GetComponent<PlayerController>();
+        playerCondition = GetComponent<PlayerCondition>();
+        equip = GetComponent<Equipment>();
+        skill = GetComponent<EquipSkill>();
     }
+
 }
